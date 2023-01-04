@@ -8,8 +8,8 @@ public class Life : MonoBehaviour
     delegate void OnTakeDamage();
     OnTakeDamage onTakeDamage;
 
-    delegate void OnDeath();
-    OnDeath onDeath;
+    public delegate void OnDeath();
+    public OnDeath onDeath;
 
     [SerializeField]
     private int maxLife = 3;
@@ -39,6 +39,8 @@ public class Life : MonoBehaviour
 
         if(life <= 0)
         {
+            life = 0;
+            Time.timeScale = 0;
             onDeath?.Invoke();
             return;
         }

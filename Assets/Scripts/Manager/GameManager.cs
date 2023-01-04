@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager GameManagerInstance;
+    public static GameManager GameManagerInstance;
 
     [SerializeField]
     private GameObject playerController = null;
@@ -44,6 +44,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject GetPlayerController()
     {
-        return playerController;
+        return GameObject.FindGameObjectWithTag("Player");
     }
 }
