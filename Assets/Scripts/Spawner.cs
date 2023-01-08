@@ -23,6 +23,6 @@ public class Spawner : MonoBehaviour
         GameObject instancedEnemy = Instantiate(enemy, transform.position, Quaternion.identity);
         _timer -= 1;
 
-        player.AddTarget(ref instancedEnemy);
+        player.targets.Add(instancedEnemy);
     }
 }

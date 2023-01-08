@@ -16,4 +16,12 @@ public class Enemy : MonoBehaviour
     {
         transform.Translate(Vector2.left * (speed * Time.deltaTime));
     }
+
+    public bool Hit()
+    {
+        Char player = GameObject.FindWithTag("player").GetComponent<Char>();
+        player.targets.Remove(gameObject);
+        Object.Destroy(gameObject);
+        return true;
+    }
 }

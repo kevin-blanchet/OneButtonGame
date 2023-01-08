@@ -4,26 +4,37 @@ using UnityEngine;
 
 public class Char : MonoBehaviour
 {
-    private List<GameObject> _targets;
+    public List<GameObject> targets;
     private GameObject _target;
+    private bool _canShoot = true;
+    private float _shootTimer = 0;
+    [SerializeField] private float shootDelay = 0.5f;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
-        _targets = new List<GameObject>();
+        targets = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindClosestEnemy(_targets))
+        if (FindClosestEnemy(targets))
         {
-            _target.GetComponent<Target>().SetTarget();
+            Debug.Log("newTargetSet");
         }
-    }
-    
-    public void AddTarget(ref GameObject target)
-    {
-        _targets.Add(target);
+
+        _canShoot = (_shootTimer += Time.deltaTime) >= shootDelay;
+        
+        if (Input.anyKeyDown && _canShoot)
+        {
+
+            if (Shoot())
+            {
+                Debug.Log("input detected");
+            }
+        }
     }
 
     private bool FindClosestEnemy(List<GameObject> enemies)
@@ -51,7 +62,26 @@ public class Char : MonoBehaviour
             return false;
         }
 
+        if (_target != null)
+        {
+            _target.GetComponent<Target>().ResetTarget();
+        }
         _target = tMin;
+        _target.GetComponent<Target>().SetTarget();
+        
         return true;
+    }
+
+    private bool Shoot()
+    {
+        _shootTimer = 0;
+        
+        if (_target == null)
+        {
+            return false;
+        }
+        
+        bool isHit = _target.GetComponent<Target>().Hit();
+        return isHit;
     }
 }
