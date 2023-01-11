@@ -5,11 +5,11 @@ using UnityEngine;
 public class Life : MonoBehaviour
 {
 
-    delegate void OnTakeDamage();
-    OnTakeDamage onTakeDamage;
+    delegate void DelOnTakeDamage();
+    private DelOnTakeDamage _onTakeDamage;
 
-    public delegate void OnDeath();
-    public OnDeath onDeath;
+    public delegate void DelOnDeath();
+    public DelOnDeath OnDeath;
 
     [SerializeField]
     private int maxLife = 3;
@@ -41,18 +41,19 @@ public class Life : MonoBehaviour
         {
             life = 0;
             Time.timeScale = 0;
-            onDeath?.Invoke();
+            OnDeath?.Invoke();
             return;
         }
 
-        onTakeDamage?.Invoke();
+        _onTakeDamage?.Invoke();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject);
+            GameManager.GameManagerInstance.targets.Remove(other.gameObject);
+            Destroy(other.gameObject);
             TakeDamage();
         }
     }
