@@ -25,9 +25,9 @@ public class Target : MonoBehaviour
             case "Enemy":
                 isHit = GetComponent<Enemy>().Hit();
                 break;
-            // case "Neutral":
-            //     GetComponent<Neutral>().Hit();
-            //     break;
+            case "Neutral":
+                GetComponent<Neutral>().Hit();
+                break;
             // case "Mechanic":
             //     GetComponent<Mechanic>().Hit();
             //     break;

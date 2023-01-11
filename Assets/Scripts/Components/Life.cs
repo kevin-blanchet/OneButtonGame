@@ -5,8 +5,8 @@ using UnityEngine;
 public class Life : MonoBehaviour
 {
 
-    public delegate void DelOnTakeDamage(int life);
-    public DelOnTakeDamage _onTakeDamage;
+    delegate void DelOnTakeDamage();
+    private DelOnTakeDamage _onTakeDamage;
 
     public delegate void DelOnDeath();
     public DelOnDeath OnDeath;
@@ -21,13 +21,11 @@ public class Life : MonoBehaviour
         life = maxLife;
     }
 
-    void TakeDamage()
+    public void TakeDamage()
     {
         life--;
 
-        _onTakeDamage?.Invoke(life);
-
-        if (life <= 0)
+        if(life <= 0)
         {
             life = 0;
             Time.timeScale = 0;
@@ -35,11 +33,7 @@ public class Life : MonoBehaviour
             return;
         }
 
-    }
-
-    public int GetMaxLife()
-    {
-        return maxLife;
+        _onTakeDamage?.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

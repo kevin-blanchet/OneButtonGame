@@ -41,4 +41,12 @@ public class Neutral : MonoBehaviour
             isDead = true;
         }
     }
+
+    public bool Hit()
+    {
+        GameManager.GameManagerInstance.targets.Remove(gameObject);
+        Object.Destroy(gameObject);
+        GameManager.GameManagerInstance.GetPlayerController().GetComponent<Life>().TakeDamage();
+        return true;
+    }
 }

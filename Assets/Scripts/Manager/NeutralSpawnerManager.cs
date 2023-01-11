@@ -35,20 +35,7 @@ public class NeutralSpawnerManager : MonoBehaviour
     void SpawnNeutralCharacter()
     {
         int rdn = Random.Range(0, _spawnPoints.Count);
-        
-        if(_neutralSpawnQueue.Count < _maxNeutralSpawn)
-        {
-            GameObject go = Instantiate(_neutral, _spawnPoints[rdn], Quaternion.identity);
-            _neutralSpawnQueue.Add(go);
-        }
-        else
-        {
-            GameObject go = _neutralSpawnQueue[0];
-            _neutralSpawnQueue.RemoveAt(0);
-            _neutralSpawnQueue.Add(go);
-            go.transform.position = _spawnPoints[rdn];
-            go.GetComponent<Neutral>()?.Spawn();
-        }
-        
+            
+        GameManager.GameManagerInstance.SpawnTarget(_neutral, _spawnPoints[rdn]);
     }
 }
