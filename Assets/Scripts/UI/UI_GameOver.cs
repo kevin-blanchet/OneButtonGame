@@ -5,20 +5,22 @@ using UnityEngine;
 public class UI_GameOver : MonoBehaviour
 {
 
-    private GameObject playerController;
+    private GameObject _player;
+    private Canvas _canvas;
 
     private void Awake()
     {
-        GetComponent<Canvas>().enabled = false;
+        _canvas = gameObject.GetComponent<Canvas>();
+        _canvas.enabled = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GameManager.GameManagerInstance.GetPlayerController();
-        if (playerController)
+        _player = GameManager.GameManagerInstance.GetPlayerController();
+        if (_player)
         {
-            playerController.GetComponent<Life>().onDeath += GameOver;
+            _player.GetComponent<Life>().OnDeath += GameOver;
         }
     }
 
@@ -30,14 +32,14 @@ public class UI_GameOver : MonoBehaviour
 
     void GameOver()
     {
-        GetComponent<Canvas>().enabled = true;
+        _canvas.enabled = true;
     }
 
     private void OnDisable()
     {
-        if (playerController)
+        if (_player)
         {
-            playerController.GetComponent<Life>().onDeath -= GameOver;
+            _player.GetComponent<Life>().OnDeath -= GameOver;
         }
     }
 }

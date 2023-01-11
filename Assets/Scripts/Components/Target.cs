@@ -4,24 +4,17 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-    
+    private bool _isTargeted = false;
     public void SetTarget()
     {
         transform.GetChild(0).gameObject.SetActive(true);
+        _isTargeted = true;
     }
     
     public void ResetTarget()
     {
         transform.GetChild(0).gameObject.SetActive(false);
+        _isTargeted = false;
     }
 
     public virtual bool Hit()
@@ -29,13 +22,13 @@ public class Target : MonoBehaviour
         bool isHit = false;
         switch (tag)
         {
-            case "enemy":
+            case "Enemy":
                 isHit = GetComponent<Enemy>().Hit();
                 break;
-            // case "neutral":
+            // case "Neutral":
             //     GetComponent<Neutral>().Hit();
             //     break;
-            // case "mechanic":
+            // case "Mechanic":
             //     GetComponent<Mechanic>().Hit();
             //     break;
         }

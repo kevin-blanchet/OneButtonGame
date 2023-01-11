@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private Vector3 _playerSpawnPosition;
     public static GameManager GameManagerInstance;
+    private GameObject _player;
+    
+    public List<GameObject> targets;
 
     [SerializeField]
     private GameObject playerController = null;
@@ -23,7 +27,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        targets = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -39,11 +43,17 @@ public class GameManager : MonoBehaviour
             Debug.LogError("no playerController found");
             return;
         }
-        Instantiate(playerController, transform.position, Quaternion.identity);
+        _player = Instantiate(playerController, _playerSpawnPosition, Quaternion.identity);
+    }
+
+    public void SpawnTarget(GameObject entity, Vector3 position)
+    {
+        GameObject instancedEnemy = Instantiate(entity, position, Quaternion.identity);
+        targets.Add(instancedEnemy);
     }
 
     public GameObject GetPlayerController()
     {
-        return GameObject.FindGameObjectWithTag("Player");
+        return _player;
     }
 }

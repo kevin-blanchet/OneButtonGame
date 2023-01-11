@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Char : MonoBehaviour
 {
-    public List<GameObject> targets;
     private GameObject _target;
     private bool _canShoot = true;
     private float _shootTimer = 0;
@@ -14,13 +13,12 @@ public class Char : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        targets = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FindClosestEnemy(targets))
+        if (FindClosestEnemy(GameManager.GameManagerInstance.targets))
         {
             Debug.Log("newTargetSet");
         }
@@ -29,17 +27,16 @@ public class Char : MonoBehaviour
         
         if (Input.anyKeyDown && _canShoot)
         {
-
             if (Shoot())
             {
-                Debug.Log("input detected");
+                //Debug.Log("PEW PEW");
             }
         }
     }
 
-    private bool FindClosestEnemy(List<GameObject> enemies)
+    private bool FindClosestEnemy(List<GameObject> targets)
     {
-        if (enemies.Count == 0)
+        if (targets.Count == 0)
         {
             return false;
         }
@@ -47,7 +44,7 @@ public class Char : MonoBehaviour
         GameObject tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
-        foreach (GameObject t in enemies)
+        foreach (GameObject t in targets)
         {
             float dist = Vector3.Distance(t.transform.position, currentPos);
             if (dist < minDist)

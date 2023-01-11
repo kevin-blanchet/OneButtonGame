@@ -5,11 +5,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed = 1f;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
@@ -19,8 +14,7 @@ public class Enemy : MonoBehaviour
 
     public bool Hit()
     {
-        Char player = GameObject.FindWithTag("player").GetComponent<Char>();
-        player.targets.Remove(gameObject);
+        GameManager.GameManagerInstance.targets.Remove(gameObject);
         Object.Destroy(gameObject);
         return true;
     }
