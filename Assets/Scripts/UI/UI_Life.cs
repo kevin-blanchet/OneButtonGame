@@ -8,9 +8,9 @@ public class UI_Life : MonoBehaviour
     private Life lifeComponent;
 
     [SerializeField]
-    private GameObject _spriteLife;
+    private Image _spriteLife;
 
-    private List<GameObject> _spritesLifes = new List<GameObject>();
+    private List<Image> _spritesLifes = new List<Image>();
 
     private void Awake()
     {
@@ -22,11 +22,9 @@ public class UI_Life : MonoBehaviour
         lifeComponent = GameManager.GameManagerInstance?.GetPlayerController()?.GetComponent<Life>();
         if (!lifeComponent) return;
 
-        
-
         for (int i = 0; i < lifeComponent.GetMaxLife(); ++i)
         {
-            GameObject img = Instantiate(_spriteLife, transform.position, Quaternion.identity);
+            Image img = Instantiate(_spriteLife, transform.position, Quaternion.identity);
             img.transform.SetParent(transform);
             _spritesLifes.Add(img);
         }
@@ -34,13 +32,13 @@ public class UI_Life : MonoBehaviour
     
     void AddLife(int remainingLife)
     {
-        _spritesLifes[remainingLife - 1].SetActive(true);
+        _spritesLifes[remainingLife - 1].enabled = true;
     }
 
     void RemoveLife(int remainingLife)
     {
         if (remainingLife < 0) return;
-        _spritesLifes[remainingLife].SetActive(false);
+        _spritesLifes[remainingLife].enabled = false;
     }
 
     private void OnEnable()
