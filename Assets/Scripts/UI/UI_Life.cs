@@ -17,24 +17,12 @@ public class UI_Life : MonoBehaviour
         InitUI();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void InitUI()
     {
         lifeComponent = GameManager.GameManagerInstance?.GetPlayerController()?.GetComponent<Life>();
         if (!lifeComponent) return;
 
-        lifeComponent._onTakeDamage += RemoveLife;
+        
 
         for (int i = 0; i < lifeComponent.GetMaxLife(); ++i)
         {
@@ -51,7 +39,13 @@ public class UI_Life : MonoBehaviour
 
     void RemoveLife(int remainingLife)
     {
+        if (remainingLife < 0) return;
         _spritesLifes[remainingLife].SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        lifeComponent._onTakeDamage += RemoveLife;
     }
 
     private void OnDisable()

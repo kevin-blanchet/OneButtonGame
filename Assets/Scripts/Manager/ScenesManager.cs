@@ -14,18 +14,6 @@ public class ScenesManager : MonoBehaviour
         AddScene();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void AddScene()
     {
         foreach(string scene in _scenes)
