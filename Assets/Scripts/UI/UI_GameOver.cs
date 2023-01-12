@@ -1,17 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UI_GameOver : MonoBehaviour
 {
 
     private GameObject _player;
-    private Canvas _canvas;
+    private TextMeshProUGUI _txtGameOver;
 
     private void Awake()
     {
-        _canvas = gameObject.GetComponent<Canvas>();
-        _canvas.enabled = false;
+        _txtGameOver = GetComponentInChildren<TextMeshProUGUI>();
+        _txtGameOver.enabled = false;
     }
 
     // Start is called before the first frame update
@@ -32,7 +31,7 @@ public class UI_GameOver : MonoBehaviour
 
     void GameOver()
     {
-        _canvas.enabled = true;
+        _txtGameOver.enabled = true;
     }
 
     private void OnDisable()
