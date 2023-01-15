@@ -34,7 +34,7 @@ public class UI_GameOver : MonoBehaviour
     {
         if (_gameOver)
         {
-            _timer += Time.deltaTime;
+            _timer += Time.unscaledDeltaTime;
             if (_timer >= _timeToRestart)
             {
                 SceneManager.LoadScene(0);
