@@ -5,7 +5,7 @@ using UnityEngine;
 public class NeutralSpawnerManager : MonoBehaviour
 {
     [SerializeField]
-    private List<Transform> _spawnPoint;
+    private List<Vector3> _spawnPoints;
 
     [SerializeField]
     private GameObject _neutral;
@@ -18,17 +18,6 @@ public class NeutralSpawnerManager : MonoBehaviour
     private int _maxNeutralSpawn;
     private List<GameObject> _neutralSpawnQueue = new List<GameObject>();
 
-    private void Awake()
-    {
-       
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -39,28 +28,14 @@ public class NeutralSpawnerManager : MonoBehaviour
         else
         {
             SpawnNeutralCharacter();
-            _timer = 0;
+            _timer -= _timeSpawn;
         }
     }
 
     void SpawnNeutralCharacter()
     {
-        int rdn = Random.Range(0, _spawnPoint.Count);
-        
-        if(_neutralSpawnQueue.Count < _maxNeutralSpawn)
-        {
-            GameObject go = Instantiate(_neutral, _spawnPoint[rdn].position, _spawnPoint[rdn].rotation);
-            _neutralSpawnQueue.Add(go);
-        }
-        else
-        {
-            GameObject go = _neutralSpawnQueue[0];
-            _neutralSpawnQueue.RemoveAt(0);
-            _neutralSpawnQueue.Add(go);
-            go.transform.position = _spawnPoint[rdn].position;
-            go.transform.rotation = _spawnPoint[rdn].rotation;
-            go.GetComponent<Neutral>()?.Spawn();
-        }
-        
+        int rdn = Random.Range(0, _spawnPoints.Count);
+            
+        GameManager.GameManagerInstance.SpawnTarget(_neutral, _spawnPoints[rdn]);
     }
 }

@@ -9,10 +9,12 @@ public class Char : MonoBehaviour
     private float _shootTimer = 0;
     [SerializeField] private float shootDelay = 0.5f;
     
+    private AudioSource _gunFired;
     
     // Start is called before the first frame update
     void Start()
     {
+        _gunFired = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -72,6 +74,9 @@ public class Char : MonoBehaviour
     private bool Shoot()
     {
         _shootTimer = 0;
+        
+        _gunFired.pitch = Random.Range(1f, 1.2f);
+        _gunFired.Play();
         
         if (_target == null)
         {

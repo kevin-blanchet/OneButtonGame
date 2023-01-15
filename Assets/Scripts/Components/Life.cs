@@ -1,31 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Life : MonoBehaviour
 {
 
-    public delegate void DelOnTakeDamage(int life);
+    public delegate void DelOnTakeDamage(int lives);
+
     public DelOnTakeDamage _onTakeDamage;
 
     public delegate void DelOnDeath();
+
     public DelOnDeath OnDeath;
 
-    [SerializeField]
-    private int maxLife = 3;
-    [SerializeField]
-    private int life = 0;
+    [SerializeField] private int maxLife = 3;
+    [SerializeField] private int life = 0;
 
     private void Awake()
     {
         life = maxLife;
     }
 
-    void TakeDamage()
+    public void TakeDamage()
     {
         life--;
-
-        _onTakeDamage?.Invoke(life);
 
         if (life <= 0)
         {
@@ -35,11 +34,7 @@ public class Life : MonoBehaviour
             return;
         }
 
-    }
-
-    public int GetMaxLife()
-    {
-        return maxLife;
+        _onTakeDamage?.Invoke(life);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -50,5 +45,10 @@ public class Life : MonoBehaviour
             Destroy(other.gameObject);
             TakeDamage();
         }
+    }
+
+    public int GetMaxLife()
+    {
+        return maxLife;
     }
 }

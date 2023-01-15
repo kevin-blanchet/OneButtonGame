@@ -15,25 +15,22 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(!GameManagerInstance && GameManagerInstance != this)
+        if(GameManagerInstance != null && GameManagerInstance != this)
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
-        GameManagerInstance = this;
+        else
+        {
+            GameManagerInstance = this;
 
-        SpawnPlayerController();
+            SpawnPlayerController();
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
         targets = new List<GameObject>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void SpawnPlayerController()

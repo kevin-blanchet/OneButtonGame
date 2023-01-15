@@ -7,13 +7,13 @@ public class Target : MonoBehaviour
     private bool _isTargeted = false;
     public void SetTarget()
     {
-        transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         _isTargeted = true;
     }
     
     public void ResetTarget()
     {
-        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         _isTargeted = false;
     }
 
@@ -25,9 +25,9 @@ public class Target : MonoBehaviour
             case "Enemy":
                 isHit = GetComponent<Enemy>().Hit();
                 break;
-            // case "Neutral":
-            //     GetComponent<Neutral>().Hit();
-            //     break;
+            case "Neutral":
+                GetComponent<Neutral>().Hit();
+                break;
             // case "Mechanic":
             //     GetComponent<Mechanic>().Hit();
             //     break;
