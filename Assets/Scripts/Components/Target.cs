@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
+    public delegate void DelOnTargetHit();
+    public static DelOnTargetHit _onTargetHit;
+
     private bool _isTargeted = false;
     public void SetTarget()
     {
@@ -20,6 +23,7 @@ public class Target : MonoBehaviour
     public virtual bool Hit()
     {
         bool isHit = false;
+        _onTargetHit?.Invoke();
         switch (tag)
         {
             case "Enemy":
