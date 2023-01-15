@@ -9,7 +9,14 @@ public class MainMenu : MonoBehaviour
     {
         if(Input.anyKeyDown)
         {
-            StartGame();
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+            else
+            {
+                StartGame();
+            }
         }
     }
 
