@@ -26,6 +26,8 @@ public class Life : MonoBehaviour
     {
         life--;
 
+        _onTakeDamage?.Invoke(life);
+
         if (life <= 0)
         {
             life = 0;
@@ -33,8 +35,6 @@ public class Life : MonoBehaviour
             OnDeath?.Invoke();
             return;
         }
-
-        _onTakeDamage?.Invoke(life);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
