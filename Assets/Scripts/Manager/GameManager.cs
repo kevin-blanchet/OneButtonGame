@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public float score = 0;
+    public float scoreMultiplyer = 1;
+    
     [SerializeField] private Vector3 _playerSpawnPosition;
     public static GameManager GameManagerInstance;
     private GameObject _player;

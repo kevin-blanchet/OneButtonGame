@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
 
     public bool Hit()
     {
+        GameManager.GameManagerInstance.score += 100 * GameManager.GameManagerInstance.scoreMultiplyer;
+        GameManager.GameManagerInstance.scoreMultiplyer *= 1.1f;
+        
         GameManager.GameManagerInstance.targets.Remove(gameObject);
         Object.Destroy(gameObject);
         return true;
