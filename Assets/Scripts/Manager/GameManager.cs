@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public float score = 0;
+    public float scoreMultiplyer = 1;
+    
     [SerializeField] private Vector3 _playerSpawnPosition;
     public static GameManager GameManagerInstance;
     private GameObject _player;
@@ -33,6 +37,14 @@ public class GameManager : MonoBehaviour
         targets = new List<GameObject>();
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
+    
     void SpawnPlayerController()
     {
         if (!playerController)

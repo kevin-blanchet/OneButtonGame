@@ -44,6 +44,9 @@ public class Neutral : MonoBehaviour
 
     public bool Hit()
     {
+        GameManager.GameManagerInstance.score -= 100 * GameManager.GameManagerInstance.scoreMultiplyer;
+        GameManager.GameManagerInstance.scoreMultiplyer = 1;
+        
         GameManager.GameManagerInstance.targets.Remove(gameObject);
         Object.Destroy(gameObject);
         GameManager.GameManagerInstance.GetPlayerController().GetComponent<Life>().TakeDamage();
