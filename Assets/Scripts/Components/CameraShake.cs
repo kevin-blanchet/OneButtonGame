@@ -6,10 +6,10 @@ using Cinemachine;
 public class CameraShake : MonoBehaviour
 {
     [SerializeField]
-    private float _delayShake = 0.2f;
+    private float _delayShake = 0.5f;
 
     [SerializeField]
-    private float _amplitudeShake = 0.55f;
+    private float _amplitudeShake = 0.5f;
 
     [SerializeField]
     private CinemachineVirtualCamera _cinemachineVirtualCamera;
@@ -26,8 +26,8 @@ public class CameraShake : MonoBehaviour
 
     IEnumerator CoroutineShake()
     {
-        _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = _amplitudeShake;
-        _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_PivotOffset = new Vector3(Random.Range(0, 1), Random.Range(0, 1), Random.Range(0, 1));
+        _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = _amplitudeShake * GameManager.GameManagerInstance.scoreMultiplyer;
+        _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_PivotOffset = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1));
         yield return new WaitForSeconds(_delayShake);
         _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
     }

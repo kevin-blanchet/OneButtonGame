@@ -591,7 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delayShake: 0.2
-  _amplitudeShake: 0.55
+  _amplitudeShake: 0.5
   _cinemachineVirtualCamera: {fileID: 1432272495}
 --- !u!114 &519420035
 MonoBehaviour:
@@ -1399,8 +1399,8 @@ MonoBehaviour:
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0
-  m_FrequencyGain: 0
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
+  m_FrequencyGain: 5
+  mNoiseOffsets: {x: 604.7487, y: -40.265656, z: -336.3899}
 --- !u!1001 &1238037858
 PrefabInstance:
   m_ObjectHideFlags: 0
